@@ -1,0 +1,18 @@
+meta {
+  name: POST Exam
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/background/exam
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "message": "Postman message",
+      "token": "EXAM-TIME"
+  }
+}

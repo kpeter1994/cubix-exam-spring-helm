@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "c8507856-6cde-4a79-ab55-afb26b9d70aa",
+		"name": "Exam - Background application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Local run (with 8080 port)",
+			"item": [
+				{
+					"name": "Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/background/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"background",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Exam",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"Postman message\",\r\n    \"token\": \"EXAM-TIME\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/background/exam",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"background",
+								"exam"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
