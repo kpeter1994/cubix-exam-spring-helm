@@ -1,0 +1,11 @@
+image:
+  repository: "quay.io/drsylent/cubix/exam/background"
+  tag: "springboot3"
+ports:
+  business: 8080
+  management: 8080
+probes:
+  livenessPath: /actuator/health/liveness
+  readinessPath: /actuator/health/readiness
+podMonitor:
+  enabled: false
