@@ -67,3 +67,15 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env:
+  - name: EXAMPLE_ENV_VAR
+    value: "example-value"
+
+probes:
+  livenessPath: /actuator/health/liveness
+  readinessPath: /actuator/health/readiness
+
+podMonitor:
+  enabled: false
+  metricsPath: /actuator/prometheus
