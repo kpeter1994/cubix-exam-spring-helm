@@ -1,0 +1,16 @@
+
+image:
+  repository: "ghcr.io/kpeter1994/frontface-app"
+  tag: "latest"
+
+ports:
+  business: 8080
+  management: 8081
+
+probes:
+  livenessPath: /actuator/health/liveness
+  readinessPath: /actuator/health/readiness
+podMonitor:
+  enabled: true
+  metricsPath: /actuator/prometheus
+
