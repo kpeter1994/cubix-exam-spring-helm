@@ -35,11 +35,24 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: business
-              containerPort: 8080
+              containerPort: {{ .Values.ports.business }}
               protocol: TCP
             - name: management
-              containerPort: 8081
+              containerPort: {{ .Values.ports.management }}
               protocol: TCP
+          env:
+            {{- range .Values.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.livenessPath }}
+              port: {{ .Values.ports.business }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readinessPath }}
+              port: {{ .Values.ports.business }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -53,4 +66,14 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.podMonitor.enabled }}
+      podMonitor:
+        spec:
+          selector:
+            matchLabels:
+              {{- include "exam-chart.selectorLabels" . | nindent 12 }}
+          podMetricsEndpoints:
+            - path: {{ .Values.podMonitor.metricsPath }}
+              port: {{ .Values.ports.business }}
       {{- end }}
